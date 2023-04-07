@@ -25,13 +25,13 @@ Open `src/main/resources/application.properties`
 ```properties
 spring.datasource.url= jdbc:mysql://localhost:3306/testdb?useSSL=false
 spring.datasource.username= root
-spring.datasource.password= 123456
+spring.datasource.password= root
 
 spring.jpa.properties.hibernate.dialect= org.hibernate.dialect.MySQL5InnoDBDialect
 spring.jpa.hibernate.ddl-auto= update
 
 # App Properties
-bezkoder.app.jwtSecret= bezKoderSecretKey
+bezkoder.app.jwtSecret= apiSecret
 bezkoder.app.jwtExpirationMs= 3600000
 bezkoder.app.jwtRefreshExpirationMs= 86400000
 ```
