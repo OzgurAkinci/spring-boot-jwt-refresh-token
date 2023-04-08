@@ -31,9 +31,9 @@ spring.jpa.properties.hibernate.dialect= org.hibernate.dialect.MySQL5InnoDBDiale
 spring.jpa.hibernate.ddl-auto= update
 
 # App Properties
-bezkoder.app.jwtSecret= apiSecret
-bezkoder.app.jwtExpirationMs= 3600000
-bezkoder.app.jwtRefreshExpirationMs= 86400000
+app.jwtSecret= apiSecret
+app.jwtExpirationMs= 3600000
+app.jwtRefreshExpirationMs= 86400000
 ```
 
 ## Run Spring Boot application
