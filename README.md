@@ -5,16 +5,16 @@ Build JWT Refresh Token in the Java Spring Boot Application. You can know how to
 ## User Registration, User Login and Authorization process.
 The diagram shows flow of how we implement User Registration, User Login and Authorization process.
 
-![spring-boot-spring-security-jwt-authentication-flow](spring-boot-spring-security-jwt-authentication-flow.png)
+![spring-boot-spring-security-jwt-authentication-flow](spring-boot-spring-security-jwt-authentication-flow1.png)
 
 And this is for Refresh Token:
 
-![spring-boot-refresh-token-jwt-example-flow](spring-boot-refresh-token-jwt-example-flow.png)
+![spring-boot-refresh-token-jwt-example-flow](spring-boot-refresh-token-jwt-example-flow1.png)
 
 ## Spring Boot Server Architecture with Spring Security
 You can have an overview of our Spring Boot Server with the diagram below:
 
-![spring-boot-jwt-authentication-spring-security-architecture](spring-boot-jwt-authentication-spring-security-architecture.png)
+![spring-boot-jwt-authentication-spring-security-architecture](spring-boot-jwt-authentication-spring-security-architecture1.png)
 
 ## Configure Spring Datasource, JPA, App properties
 Open `src/main/resources/application.properties`
