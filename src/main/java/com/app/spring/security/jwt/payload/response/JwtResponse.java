@@ -1,74 +1,47 @@
 package com.app.spring.security.jwt.payload.response;
 
-import java.util.List;
-
+import com.app.spring.security.jwt.dto.UserDTO;
 public class JwtResponse {
 	private String token;
 	private String type = "Bearer";
 	private String refreshToken;
-	private Long id;
-	private String username;
-	private String email;
-	private List<String> roles;
+	private UserDTO user;
 
-	public JwtResponse(String accessToken, String refreshToken, Long id, String username, String email, List<String> roles) {
+	public JwtResponse(String accessToken, String refreshToken, UserDTO user) {
 		this.token = accessToken;
 		this.refreshToken = refreshToken;
-		this.id = id;
-		this.username = username;
-		this.email = email;
-		this.roles = roles;
+		this.user = user;
 	}
 
 	public String getAccessToken() {
 		return token;
 	}
 
-	public void setAccessToken(String accessToken) {
-		this.token = accessToken;
+	public void setAccessToken(String token) {
+		this.token = token;
 	}
 
-	public String getTokenType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setTokenType(String tokenType) {
-		this.type = tokenType;
+	public void setType(String type) {
+		this.type = type;
 	}
 
-	public Long getId() {
-		return id;
+	public String getRefreshToken() {
+		return refreshToken;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setRefreshToken(String refreshToken) {
+		this.refreshToken = refreshToken;
 	}
 
-	public String getEmail() {
-		return email;
+	public UserDTO getUser() {
+		return user;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUser(UserDTO user) {
+		this.user = user;
 	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public List<String> getRoles() {
-		return roles;
-	}
-
-  public String getRefreshToken() {
-    return refreshToken;
-  }
-
-  public void setRefreshToken(String refreshToken) {
-    this.refreshToken = refreshToken;
-  }
 }

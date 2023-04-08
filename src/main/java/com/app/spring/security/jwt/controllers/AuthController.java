@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import com.app.spring.security.jwt.dto.UserDTO;
 import com.app.spring.security.jwt.models.Role;
 import com.app.spring.security.jwt.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,8 +77,9 @@ public class AuthController {
 
     RefreshToken refreshToken = refreshTokenService.createRefreshToken(userDetails.getId());
 
-    return ResponseEntity.ok(new JwtResponse(jwt, refreshToken.getToken(), userDetails.getId(),
-        userDetails.getUsername(), userDetails.getEmail(), roles));
+    UserDTO userDTO = new UserDTO(userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), roles);
+
+    return ResponseEntity.ok(new JwtResponse(jwt, refreshToken.getToken(), userDTO));
   }
 
   @PostMapping("/signup")
