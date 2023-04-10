@@ -9,20 +9,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface FileService {
-    String STORAGE_MODE_NATIVE = "native";
-    String STORAGE_MODE_CLOUD = "cloud";
-
-    public List<FileView> listDirectories(Optional<String> dir);
-
-    public List<FileView> listFiles(Optional<String> dir);
-
-    public File getFile(String filePath);
-
-    public AjaxResponse upload(MultipartFile file, Optional<String> dir, Optional<String> type);
-
-    public AjaxResponse delete(String filePath);
-
-    public AjaxResponse addFolder(String folderName, String folderPath);
-
-    public AjaxResponse deleteFolder(String folderName, String folderPath);
+    List<FileView> listDirectories(Optional<String> dir);
+    List<FileView> listFiles(Optional<String> dir);
+    File getFile(String filePath);
+    AjaxResponse upload(MultipartFile file, Optional<String> dir, Optional<String> type);
+    AjaxResponse delete(String filePath);
+    AjaxResponse addFolder(String folderName, String folderPath);
+    AjaxResponse deleteFolder(String folderName, String folderPath);
 }
