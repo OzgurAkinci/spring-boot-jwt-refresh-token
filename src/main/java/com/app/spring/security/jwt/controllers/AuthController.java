@@ -10,6 +10,8 @@ import javax.validation.Valid;
 import com.app.spring.security.jwt.dto.UserDTO;
 import com.app.spring.security.jwt.models.Role;
 import com.app.spring.security.jwt.models.User;
+import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -41,6 +43,7 @@ import com.app.spring.security.jwt.security.services.UserDetailsImpl;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
+@Log4j2
 public class AuthController {
   @Autowired
   AuthenticationManager authenticationManager;
@@ -149,9 +152,13 @@ public class AuthController {
   
   @PostMapping("/signout")
   public ResponseEntity<?> logoutUser() {
-    UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    Long userId = userDetails.getId();
-    refreshTokenService.deleteByUserId(userId);
+    try {
+      UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+      Long userId = userDetails.getId();
+      refreshTokenService.deleteByUserId(userId);
+    }catch (Exception e) {
+      log.error(e.getMessage(), e);
+    }
     return ResponseEntity.ok(new MessageResponse("Log out successful!"));
   }
 
