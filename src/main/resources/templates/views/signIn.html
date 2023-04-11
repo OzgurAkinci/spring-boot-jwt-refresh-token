@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="https://thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
     <title>Bootstrap 5 Example</title>
     <meta charset="utf-8">
@@ -12,7 +12,12 @@
 
 <div class="container-fluid p-5">
     <div class="col-md-4 offset-md-4">
-        <form id="signInForm">
+        <div th:if="${param.error}">
+            Invalid username and password.</div>
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
+        <form th:action="@{/system/auth/signIn}" method="post">
             <!-- Email input -->
             <div class="form-outline mb-4">
                 <label class="form-label" for="username">Username</label>
@@ -26,7 +31,7 @@
             </div>
 
             <!-- Submit button -->
-            <button type="button" id="signInButton" name="signInButton" class="btn btn-primary btn-block mb-4">Sign in</button>
+            <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
         </form>
     </div>
 </div>

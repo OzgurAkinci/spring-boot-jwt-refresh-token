@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="https://thymeleaf.org">
+<html xmlns:th="https://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>Bootstrap 5 Example</title>
     <meta charset="utf-8">
@@ -12,6 +12,7 @@
 
 <div class="container-fluid p-5">
     <div class="col-md-4 offset-md-4">
+        <span th:text="${#authentication.getPrincipal()}"></span>
         Welcome to dashboard!
     </div>
 </div>
