@@ -5,10 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-//import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -23,6 +21,8 @@ import com.app.spring.security.jwt.security.jwt.AuthEntryPointJwt;
 import com.app.spring.security.jwt.security.filters.JwtAuthenticationFilter;
 import com.app.spring.security.jwt.security.services.UserDetailsServiceImpl;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity
@@ -33,23 +33,13 @@ public class WebSecurityConfig {
     @Autowired
     private AuthEntryPointJwt unauthorizedHandler;
 
-    @Bean
-    public JwtAuthenticationFilter authenticationJwtTokenFilter() {
-        return new JwtAuthenticationFilter();
-    }
 
-    @Bean
-    public BasicAuthenticationFilter authenticationBasicFilter() {
-        return new BasicAuthenticationFilter();
-    }
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-
         authProvider.setUserDetailsService(userDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder());
-
         return authProvider;
     }
 
@@ -65,6 +55,37 @@ public class WebSecurityConfig {
 
     @Bean
     @Order(1)
+    public SecurityFilterChain apiFilterChain(HttpSecurity http) throws Exception {
+        http.cors().and().csrf().disable()
+                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.antMatcher("/api/**").addFilterBefore(new JwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+                .authorizeHttpRequests(authorize -> authorize
+                        .antMatchers("/api/auth/**").permitAll()
+                        .anyRequest().authenticated()
+                ).httpBasic(withDefaults());
+        http.authenticationProvider(authenticationProvider());
+        return http.build();
+    }
+
+    @Bean
+    public SecurityFilterChain formLoginFilterChain(HttpSecurity http) throws Exception {
+        http
+                .authorizeHttpRequests(authorize -> authorize
+                        .anyRequest().authenticated()
+                );
+        http.formLogin()
+                .loginPage("/system/auth/signIn")
+                .defaultSuccessUrl("/system/management/dashboard")
+                .permitAll()
+                .and()
+                .logout()
+                .permitAll();
+        return http.build();
+    }
+
+    /*
+    @Bean
     public SecurityFilterChain jwtFilterChain(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
@@ -79,7 +100,6 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    @Order(2)
     public SecurityFilterChain basicFilterChain(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
                 .authenticationProvider(authenticationProvider())
@@ -100,6 +120,8 @@ public class WebSecurityConfig {
                 .permitAll();
 
         return http.build();
+
+     */
         /*
         http.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
@@ -120,5 +142,5 @@ public class WebSecurityConfig {
         return http.build();
 
          */
-    }
+
 }
