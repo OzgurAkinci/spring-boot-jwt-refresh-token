@@ -12,8 +12,17 @@
 
 <div class="container-fluid p-5">
     <div class="col-md-4 offset-md-4">
-        <span th:text="${#authentication.getPrincipal()}"></span>
+        <span th:text="${#authentication.getPrincipal().getUsername()}"></span>
         Welcome to dashboard!
+
+        <p th:each="authority : ${#authentication.getAuthorities()}"
+           th:if="${authority.getAuthority().startsWith('ROLE_')}"
+           th:text="${authority.getAuthority().replaceFirst('ROLE_', '')}">
+        </p>
+
+        <form th:action="@{/system/auth/signOut}" method="post">
+            <button type="submit" class="btn btn-primary btn-block mb-4">Signout</button>
+        </form>
     </div>
 </div>
 </body>

@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import com.app.spring.security.jwt.dto.UserDTO;
 import com.app.spring.security.jwt.models.Role;
 import com.app.spring.security.jwt.models.User;
+import com.app.spring.security.jwt.security.jwt.JwtUtils;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +36,6 @@ import com.app.spring.security.jwt.payload.response.MessageResponse;
 import com.app.spring.security.jwt.payload.response.TokenRefreshResponse;
 import com.app.spring.security.jwt.repository.RoleRepository;
 import com.app.spring.security.jwt.repository.UserRepository;
-import com.app.spring.security.jwt.security.jwt.JwtUtils;
 import com.app.spring.security.jwt.security.services.RefreshTokenService;
 import com.app.spring.security.jwt.security.services.UserDetailsImpl;
 
