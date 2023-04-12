@@ -29,7 +29,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 @Slf4j
 @Component
-//@Order(1)
 @NoArgsConstructor
 @AllArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
