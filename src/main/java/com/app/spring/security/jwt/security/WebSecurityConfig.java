@@ -1,6 +1,8 @@
 package com.app.spring.security.jwt.security;
 
+import com.app.spring.security.jwt.security.jwt.JwtUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -29,6 +31,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class WebSecurityConfig {
     private final UserDetailsServiceImpl userDetailsService;
     private final AuthEntryPointJwt unauthorizedHandler;
+    private final JwtUtils jwtUtils;
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
@@ -54,7 +57,8 @@ public class WebSecurityConfig {
         http.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.antMatcher("/api/**").addFilterBefore(new JwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+        http.antMatcher("/api/**")
+                .addFilterBefore(loggingFilter().getFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(authorize -> authorize
                         .antMatchers("/api/test/**").permitAll()
                         .antMatchers("/api/auth/**").permitAll()
@@ -62,6 +66,18 @@ public class WebSecurityConfig {
                 ).httpBasic(withDefaults());
         http.authenticationProvider(authenticationProvider());
         return http.build();
+    }
+
+    @Bean
+    public FilterRegistrationBean<JwtAuthenticationFilter> loggingFilter(){
+        FilterRegistrationBean<JwtAuthenticationFilter> registrationBean
+                = new FilterRegistrationBean<>();
+
+        registrationBean.setFilter(new JwtAuthenticationFilter(jwtUtils, userDetailsService));
+        registrationBean.addUrlPatterns("/api/*");
+        registrationBean.setOrder(1);
+
+        return registrationBean;
     }
 
     @Bean

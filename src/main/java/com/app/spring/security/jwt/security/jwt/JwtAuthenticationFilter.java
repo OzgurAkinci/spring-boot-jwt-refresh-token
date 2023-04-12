@@ -8,12 +8,16 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.app.spring.security.jwt.security.services.UserDetailsImpl;
 import com.app.spring.security.jwt.security.services.UserDetailsServiceImpl;
 import io.jsonwebtoken.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.annotations.Filter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,16 +29,11 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 @Slf4j
 @Component
+//@Order(1)
+@NoArgsConstructor
+@AllArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-  @Value("${app.jwtSecret}")
-  private String jwtSecret;
-
-  @Value("${app.jwtExpirationMs}")
-  private int jwtExpirationMs;
-
-  @Autowired
   private JwtUtils jwtUtils;
-  @Autowired
   private UserDetailsServiceImpl userDetailsService;
 
   @Override
