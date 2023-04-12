@@ -85,6 +85,7 @@ public class WebSecurityConfig {
         http
                 .authorizeHttpRequests(authorize -> authorize
                         .antMatchers("/system/auth/**").permitAll()
+                        .antMatchers("/css/**").permitAll()
                         .anyRequest().authenticated()
                 );
         http.formLogin()
