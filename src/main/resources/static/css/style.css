@@ -158,9 +158,8 @@ html, body {
 
 .container-content {
     background: linear-gradient(162.67deg,rgba(66,91,182,.72) -4.74%,rgba(88,95,120,.4) -4.73%,rgba(88,95,120,.06) 79.66%);
-    border: 1px solid;
     border-radius: 5px;
-    color: inherit;
+    color: #9aa0a6;
     padding: 15px 20px 20px 20px;
     border-image: none;
 }
@@ -201,12 +200,13 @@ html, body {
 }
 
 .table-bordered td, .table-bordered th {
-    border: 1px solid #23232c!important;
+    border: 1px solid #00000030!important;
     vertical-align: middle!important;
     padding: .2rem!important;
+    color: #9aa0a6!important;
 }
 .table .thead-light th {
-    color: #c3c9cf;
+    color: #9aa0a6;
     background-color: #23232c;
 }
 
@@ -216,6 +216,18 @@ html, body {
 }
 
 .table-hover tbody tr:hover {
-    color: #d3d9de!important;
+    color: #9aa0a6!important;
     background-color: rgba(0,0,0,.075)!important;
+}
+
+.page-link {
+    background-color: #292b37!important;
+    border: 1px solid #7a7a7a30!important;
+    color: #9aa0a6;
+}
+
+.alert-dark {
+    --bs-alert-color: #a5a6a7!important;
+    --bs-alert-bg: #292b37!important;
+    --bs-alert-border-color: #7a7a7a30!important;
 }

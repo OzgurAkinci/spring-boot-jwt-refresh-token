@@ -41,8 +41,9 @@
 <div th:fragment="drawer" class="l-navbar" id="nav-bar" style="background: linear-gradient( #21212c, #21212c);">
     <nav class="nav">
         <div>
-            <a href="#" class="nav_logo">
-                <span class="nav_logo-name">System Management</span>
+            <a th:href="@{/}" class="nav_logo">
+                <i class="fa fa-circle nav_icon" style="color: #ffffff" aria-hidden="true"></i>
+                <span class="nav_logo-name">Management</span>
             </a>
             <div class="nav_list">
                 <a th:href="@{/system/management/dashboard}" class="nav_link active nav_link_border_bottom">
@@ -52,6 +53,10 @@
                 <a th:href="@{/system/management/users}" class="nav_link nav_link_border_bottom">
                     <i class='fa fa-user-circle nav_icon' aria-hidden='true'></i>
                     <span class="nav_name">Users</span>
+                </a>
+                <a th:href="@{/system/management/categories}" class="nav_link nav_link_border_bottom">
+                    <i class='fa fa-th-list nav_icon' aria-hidden='true'></i>
+                    <span class="nav_name">Categories</span>
                 </a>
             </div>
         </div>

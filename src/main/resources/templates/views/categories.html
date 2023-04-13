@@ -7,9 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" href="../../static/css/style.css"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-navigation.css}" href="../../static/css/bootstrap-navigation.css"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap/bootstrap.css}" href="../../static/css/bootstrap/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" href="../../static/css/style.css"/>
 </head>
 <body id="body-pd">
 
@@ -19,24 +19,24 @@
 <div class="height-100 container-content row" style="margin-top:80px">
     <div class="col-12">
 
-        <div role="alert" class="alert alert-dark" th:if="${usersData.totalPages > 0}">
-            Total Users Items [[${usersData.totalItems}]] , Page [[${usersData.currentPage}]] of [[${usersData.totalPages}]]
+        <div role="alert" class="alert alert-dark" th:if="${categoriesData.totalPages > 0}">
+            Total Category Items [[${categoriesData.totalItems}]] , Page [[${categoriesData.currentPage}]] of [[${categoriesData.totalPages}]]
         </div>
 
         <table class="table table-sm table-hover table-bordered table-striped">
             <thead class="thead-light">
             <tr>
                 <th th:width="50" scope="col"></th>
-                <th scope="col">Username</th>
-                <th scope="col">Email</th>
+                <th scope="col">Name</th>
+                <th scope="col">Slug</th>
                 <th th:width="75" scope="col"></th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="user, iter : ${usersData.users}" >
-                <td th:text="${(iter.index + 1) + (((usersData.currentPage - 1)) * usersData.pageSize)}"></td>
-                <td th:text="${user.username}"></td>
-                <td th:text="${user.email}"></td>
+            <tr th:each="category, iter : ${categoriesData.categories}" >
+                <td th:text="${(iter.index + 1) + (((categoriesData.currentPage - 1)) * categoriesData.pageSize)}"></td>
+                <td th:text="${category.name}"></td>
+                <td th:text="${category.slug}"></td>
                 <td>
                     <button class="btn btn-sm btn-dark mr-5">
                         <i class="fa fa-pencil" aria-hidden="true"></i>
@@ -50,8 +50,10 @@
         </table>
 
         <div class="pagination">
-            <nav th:replace="fragments/pagingTemplate :: pTemplate(${usersData})"></nav>
+            <nav th:replace="fragments/pagingTemplate :: pTemplate(${categoriesData})"></nav>
         </div>
+
+
     </div>
 </div>
 

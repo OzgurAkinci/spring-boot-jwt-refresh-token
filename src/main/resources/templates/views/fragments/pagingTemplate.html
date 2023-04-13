@@ -1,0 +1,26 @@
+<nav th:fragment="pTemplate(data)" aria-label="Pagination" th:if="${data.totalPages > 0}">
+    <ul class="pagination justify-content-center">
+        <li class="page-item" th:classappend="${data.currentPage == 1} ? 'disabled'">
+            <a th:replace="fragments/paging :: paging(1, '<<', 'First Page')"></a>
+        </li>
+        <li class="page-item font-weight-bold" th:classappend="${data.currentPage == 1} ? 'disabled'">
+            <a th:replace="fragments/paging :: paging(${data.currentPage - 1}, 'Prev', 'Previous Page')"></a>
+        </li>
+        <li class="page-item disabled" th:if="${data.currentPage - 2 > 1}">
+            <a class="page-link" href="#">...</a>
+        </li>
+        <li class="page-item" th:classappend="${page == data.currentPage} ? 'active'"
+            th:each="page : ${#numbers.sequence((data.currentPage > 2 ? (data.currentPage - 2) : 1), (data.currentPage + 2 < data.totalPages ? data.currentPage + 2 : data.totalPages))}">
+            <a th:replace="fragments/paging :: paging(${page}, ${page}, 'Page ' + ${page})"></a>
+        </li>
+        <li class="page-item disabled" th:if="${data.currentPage + 2 < data.totalPages}">
+            <a class="page-link" href="#">...</a>
+        </li>
+        <li class="page-item font-weight-bold" th:classappend="${(data.currentPage) == data.totalPages} ? 'disabled'">
+            <a th:replace="fragments/paging :: paging(${data.currentPage + 1},'Next', 'Next Page')"></a>
+        </li>
+        <li class="page-item" th:classappend="${data.currentPage == data.totalPages} ? 'disabled'">
+            <a th:replace="fragments/paging :: paging(${data.totalPages}, '>>', 'Last Page')"></a>
+        </li>
+    </ul>
+</nav>
