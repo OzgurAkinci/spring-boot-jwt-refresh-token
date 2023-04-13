@@ -107,14 +107,21 @@ a {
 
 .nav_link {
     position: relative;
-    color: var(--first-color-light);
-    margin-bottom: 1.5rem;
+    color: var(--white-color);
     transition: .3s;
     text-decoration: none;
 }
 
 .nav_link:hover {
-    color: var(--white-color)
+    color: #ffeb3b;
+}
+
+.nav_link_border_bottom {
+    border-bottom: 1px solid #5a5a5a;
+}
+
+.nav_link_border_top {
+    border-top: 1px solid #5a5a5a;
 }
 
 .nav_icon {
@@ -130,7 +137,7 @@ a {
 }
 
 .active {
-    color: var(--white-color)
+    color: #ffeb3b;
 }
 
 .active::before {

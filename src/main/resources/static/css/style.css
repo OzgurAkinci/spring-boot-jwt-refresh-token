@@ -3,6 +3,7 @@ html, body {
     margin: 0;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    background: linear-gradient( #1c1c24, #1c1c24);
 }
 
 .full { height: 100% }
@@ -156,21 +157,20 @@ html, body {
 /* Container */
 
 .container-content {
-    background-color: #3a3a3aa2;
+    background: linear-gradient(162.67deg,rgba(66,91,182,.72) -4.74%,rgba(88,95,120,.4) -4.73%,rgba(88,95,120,.06) 79.66%);
+    border: 1px solid;
+    border-radius: 5px;
     color: inherit;
     padding: 15px 20px 20px 20px;
-    border-color: #FFEB3B;
     border-image: none;
-    border-style: solid solid none;
-    border-width: 1px 0;
 }
 
 /* Backgrounds */
 
 .main-bg {
 
-    background: #424242;
-    background: linear-gradient( #424242, #212121);
+    background: #21212c;
+    background: linear-gradient( #21212c, #21212c);
 }
 
 /* Login & Register Pages*/
@@ -193,4 +193,29 @@ html, body {
     font-weight: 800;
     letter-spacing: -10px;
     margin-bottom: 0;
+}
+
+.table {
+    color: #9aa0a6!important;
+    cursor: pointer;
+}
+
+.table-bordered td, .table-bordered th {
+    border: 1px solid #23232c!important;
+    vertical-align: middle!important;
+    padding: .2rem!important;
+}
+.table .thead-light th {
+    color: #c3c9cf;
+    background-color: #23232c;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+    color: #d3d9de!important;
+    background-color: rgba(0,0,0,.075)!important;
+}
+
+.table-hover tbody tr:hover {
+    color: #d3d9de!important;
+    background-color: rgba(0,0,0,.075)!important;
 }

@@ -1,17 +1,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-
 <body>
 
-<header th:fragment="header" class="header" id="header">
-    <div class="header_toggle"> <a class='bx bx-menu' id="header-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a> </div>
-    <div class="header_img"> <img src="https://i.imgur.com/hczKIze.jpg" alt=""> </div>
+<header th:fragment="header" class="header" id="header" style="background: linear-gradient( #21212c, #21212c);">
+    <div class="header_toggle"> <a class='bx bx-menu' id="header-toggle"><i style="color: #ffffff" class="fa fa-bars" aria-hidden="true"></i></a> </div>
 </header>
 
 <nav th:fragment="header2" class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
     <!-- Navbar Brand-->
-    <a class="navbar-brand ps-3" href="index.html">Management System</a>
+    <a class="navbar-brand ps-3" href="index.html">Backend Management</a>
     <!-- Sidebar Toggle-->
     <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
     <!-- Navbar Search-->
@@ -40,32 +38,30 @@
     </ul>
 </nav>
 
-<div th:fragment="drawer" class="l-navbar" id="nav-bar" style="background: linear-gradient( #424242, #212121);">
+<div th:fragment="drawer" class="l-navbar" id="nav-bar" style="background: linear-gradient( #21212c, #21212c);">
     <nav class="nav">
         <div>
             <a href="#" class="nav_logo">
                 <span class="nav_logo-name">System Management</span>
             </a>
             <div class="nav_list">
-                <a href="#" class="nav_link active">
-                    <i class='fa fa-home nav_icon' aria-hidden='true'></i>
+                <a th:href="@{/system/management/dashboard}" class="nav_link active nav_link_border_bottom">
+                    <i class='fa fa-circle nav_icon' aria-hidden='true'></i>
                     <span class="nav_name">Dashboard</span>
                 </a>
-                <a href="#" class="nav_link">
-                    <i class='fa fa-user nav_icon' aria-hidden='true'></i>
+                <a th:href="@{/system/management/users}" class="nav_link nav_link_border_bottom">
+                    <i class='fa fa-user-circle nav_icon' aria-hidden='true'></i>
                     <span class="nav_name">Users</span>
                 </a>
             </div>
         </div>
-        <a href="#" class="nav_link">
-            <i class='fa fa-sign-out nav_icon' aria-hidden='true'></i>
-            <span class="nav_name">SignOut</span>
-        </a>
+        <form id="signOutForm" th:action="@{/system/auth/signOut}" method="post">
+            <a role="button" onclick="document.getElementById('signOutForm').submit();" class="nav_link nav_link_border_top">
+                <i class='fa fa-sign-out nav_icon' aria-hidden='true'></i>
+                <span class="nav_name">SignOut</span>
+            </a>
+        </form>
     </nav>
-</div>
-
-    <!-- Content goes here -->
-
 </div>
 </body>
 </html>
